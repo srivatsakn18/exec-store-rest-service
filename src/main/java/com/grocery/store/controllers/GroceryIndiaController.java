@@ -1,5 +1,6 @@
 package com.grocery.store.controllers;
 
+import com.grocery.store.exceptions.ObjectNotFoundException;
 import com.grocery.store.models.GetEntitiesDTO;
 import com.grocery.store.models.GetEntitiesResponseDTO;
 import com.grocery.store.models.GetEntitiesErrorDTO;
@@ -19,16 +20,9 @@ public class GroceryIndiaController {
     public IndianGroceryServices indianGroceryServices;
 
     @PostMapping("/items")
-    public ResponseEntity<Object> getItems(@RequestBody GetEntitiesDTO entity) {
-        try {
-            GroceryItem groceryItem = indianGroceryServices.findGroceryItembyId(entity.getId());
-            GetEntitiesResponseDTO getEntitiesResponseDTO = new GetEntitiesResponseDTO("Completed Successfully",
-                    "200", groceryItem);
-            return new ResponseEntity<>(getEntitiesResponseDTO, HttpStatus.OK);
-        } catch (ItemNotFoundException e) {
-            GetEntitiesErrorDTO getEntitiesErrorDTO = new GetEntitiesErrorDTO("Unsuccessful",
-                    "404", e.getMessage());
-            return new ResponseEntity<>(getEntitiesErrorDTO, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<GetEntitiesResponseDTO> getItems(@RequestBody GetEntitiesDTO entity) throws ObjectNotFoundException {
+        return new ResponseEntity<>(new GetEntitiesResponseDTO("Completed Successfully",
+                HttpStatus.OK.name(), indianGroceryServices.findGroceryItembyId(entity.getId())),
+                HttpStatus.OK);
     }
 }
