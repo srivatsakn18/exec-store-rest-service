@@ -5,6 +5,7 @@ import com.grocery.store.exceptions.AuthorizationException;
 import com.grocery.store.exceptions.UserNotFoundException;
 import com.grocery.store.models.AuthorizedUserDTO;
 import com.grocery.store.repository.UserRepository;
+import com.grocery.store.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class AuthenticationService {
         else if(!(password.equals(user.getUserPassword())))
             throw new AuthorizationException("Password is incorrect");
         else {
-            return new AuthorizedUserDTO(userId, "", (long) 0);
+            return new AuthorizedUserDTO(userId, JwtUtil.generateToken(userId), (long) 0);
         }
 
     }

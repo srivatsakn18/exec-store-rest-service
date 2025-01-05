@@ -32,11 +32,14 @@
 	</properties>
 	<dependencies>
 
-		<!-- Security Dependencies -->
+		<!-- Security Dependencies Start -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<version>2.7.18</version>
 		</dependency>
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
@@ -54,12 +57,16 @@
 			<version>0.11.5</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- Security Dependencies End -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 			<version>6.2.0</version>
 		</dependency>
+
+
+		<!-- Data Dependencies -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
